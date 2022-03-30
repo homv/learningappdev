@@ -7,6 +7,7 @@ from datetime import datetime
 import datetime as dt
 import matplotlib.pyplot as plt
 import timeago
+import os
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///tracker.db'
@@ -175,6 +176,8 @@ def viewlog(username,tname):
             val = [(int(i.value) if (i.value).isdigit() else i.value) for i in logg]
             dat,val = zip(*sorted(zip(dat, val)))
             dat = [i.strftime("%Y-%m-%d %H:%M:%S")  for i in dat]
+            if not os.path.exists('./static'):
+                os.makedirs("./static/images")
             plt.plot(dat,val)
             plt.xticks(rotation=45)
             plt.tight_layout()
