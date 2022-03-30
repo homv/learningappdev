@@ -62,6 +62,8 @@ class logging(db.Model):
         self.logtime = logtime
         self.datetime = datetime
 
+db.create_all()
+
 @app.route('/logout',methods=['GET', 'POST'])
 def logout(): 
     return redirect('/')
